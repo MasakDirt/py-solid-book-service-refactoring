@@ -43,7 +43,7 @@ class NoSpacesPrint(Print):
         print("".join(char for char in content.split()))
 
 
-class PrintMixin:
+class PrintCMD:
     __PRINT_TYPES = {
         "console": ConsolePrint,
         "reverse": ReversePrint,
@@ -52,9 +52,10 @@ class PrintMixin:
         "no_space": NoSpacesPrint,
     }
 
-    def print_book(self, print_type: str) -> None:
-        printer = self.__PRINT_TYPES.get(print_type)
+    @classmethod
+    def print_object(cls, print_type: str, object: object) -> None:
+        printer = cls.__PRINT_TYPES.get(print_type)
         if printer:
-            printer.print_content(self.title, self.content)
+            printer.print_content(object.title, object.content)
         else:
             raise ValueError(f"Unknown print type: {print_type}")

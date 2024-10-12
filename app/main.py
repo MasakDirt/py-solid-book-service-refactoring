@@ -1,22 +1,30 @@
-from app.displays import DisplayMixin
-from app.prints import PrintMixin
-from app.serializers import SerializeMixin
+from app.displays import DisplayCMD
+from app.prints import PrintCMD
+from app.serializers import SerializeCMD
 
 
-class Book(SerializeMixin, PrintMixin, DisplayMixin):
+class Book:
     def __init__(self, title: str, content: str) -> None:
-        self.title = title
-        self.content = content
+        self.__title = title
+        self.__content = content
+
+    @property
+    def title(self):
+        return self.__title
+
+    @property
+    def content(self):
+        return self.__content
 
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
     for cmd, method_type in commands:
         if cmd == "display":
-            book.display(method_type)
+            DisplayCMD.display(method_type, book)
         elif cmd == "print":
-            book.print_book(method_type)
+            PrintCMD.print_object(method_type, book)
         elif cmd == "serialize":
-            return book.serialize(method_type)
+            return SerializeCMD.serialize(method_type, book)
 
 
 if __name__ == "__main__":

@@ -27,15 +27,16 @@ class XMLSerializer(Serializer):
         return ET.tostring(root, encoding="unicode")
 
 
-class SerializeMixin:
+class SerializeCMD:
     __SERIALIZE_TYPES = {
         "json": JSONSerializer,
         "xml": XMLSerializer,
     }
 
-    def serialize(self, serialize_type: str) -> str:
-        serializer = self.__SERIALIZE_TYPES.get(serialize_type)
+    @classmethod
+    def serialize(cls, serialize_type: str, object: object) -> str:
+        serializer = cls.__SERIALIZE_TYPES.get(serialize_type)
         if serializer:
-            return serializer.serialize(self.title, self.content)
+            return serializer.serialize(object.title, object.content)
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")
