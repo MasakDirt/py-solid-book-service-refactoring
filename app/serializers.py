@@ -34,9 +34,9 @@ class SerializeCMD:
     }
 
     @classmethod
-    def serialize(cls, serialize_type: str, object: object) -> str:
+    def serialize(cls, serialize_type: str, book: object) -> str:
         serializer = cls.__SERIALIZE_TYPES.get(serialize_type)
         if serializer:
-            return serializer.serialize(object.title, object.content)
+            return serializer.serialize(book.title, book.content)
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")

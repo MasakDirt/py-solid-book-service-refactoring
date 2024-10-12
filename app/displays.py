@@ -27,9 +27,9 @@ class DisplayCMD:
     }
 
     @classmethod
-    def display(cls, display_type: str, object: object) -> None:
+    def display(cls, display_type: str, book: object) -> None:
         display_cls = cls.__DISPLAY_TPES.get(display_type)
         if display_cls:
-            return display_cls.display(object.content)
+            return display_cls.display(book.content)
         else:
             raise ValueError(f"Unknown display type: {display_type}")

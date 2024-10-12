@@ -53,9 +53,9 @@ class PrintCMD:
     }
 
     @classmethod
-    def print_object(cls, print_type: str, object: object) -> None:
+    def print_object(cls, print_type: str, book: object) -> None:
         printer = cls.__PRINT_TYPES.get(print_type)
         if printer:
-            printer.print_content(object.title, object.content)
+            printer.print_content(book.title, book.content)
         else:
             raise ValueError(f"Unknown print type: {print_type}")

@@ -9,11 +9,11 @@ class Book:
         self.__content = content
 
     @property
-    def title(self):
+    def title(self) -> str:
         return self.__title
 
     @property
-    def content(self):
+    def content(self) -> str:
         return self.__content
 
 
